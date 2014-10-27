@@ -1,0 +1,15 @@
+##FASTA parsing script taken directly from bioPython
+
+def read_FASTA_strings(filename):
+  with open(filename) as file:
+    return file.read().split('<')[1:]
+
+def read_FASTA_entries(filename):
+  return [seq.partition('\n') for seq in read_FASTA_strings(filename)]
+  
+def read_FASTA_sequences(filename):
+  return [[seq[0][1:],
+	seq[2].replace('\n', '')]
+	    for seq in read_FASTA_entries(filename)]
+	    
+print read_FASTA_sequences('rosalind.txt')
